@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import logo from '../assets/imgs/pressura-logotitle-white.png'
 
 export class LoginForm extends Component{
 
@@ -10,7 +10,7 @@ export class LoginForm extends Component{
             <div className="main">
 
                 <div className='imgs'>
-                    Hola
+                    <img src={logo} className='logo' ></img>
                 </div>
 
                 <div className="sub-main">
@@ -18,26 +18,30 @@ export class LoginForm extends Component{
                     <div>
 
                         <div>
-                            <h1>Iniciar Sesion</h1>
+                            <h1>Inicia Sesion</h1>
 
-                            <div className='login-label'>
+                            <div className='login-label-1'>
                                 Correo Electronico:
                             </div>
 
                             <div className="second-input">
-                                <input type="text" placeholder="Email" className="name" />
+                                <input type="text" placeholder="ejemplo@hotmail.com" className="name" />
                             </div>
                             <div className='login-label'>
                                 Contraseña:
                             </div>
                             <div className="second-input">
-                                <input type="password" placeholder="Password" className="name" />
+                                <input type="password" placeholder="Contraseña" className="name" />
+                            </div>
+                            
+                            <div className='button-group'>
+                                
+                                <button className="login-button">Login</button>
+                                <button className="login-button-google">Login con google</button>
+                               
                             </div>
 
-                            <div className="login-button">
-                                <button>Login</button>
-                            </div>
-
+                   
                             <p className="link">
                                 No tienes cuenta? <a href="#">Registrate</a>
                             </p>

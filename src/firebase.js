@@ -3,13 +3,12 @@ import 'firebase/auth'
 
 const app = firebase.initializeApp({
 
-    apiKey: process.env.FIREBASE_apiKey,
-    authDomain: process.env.FIREBASE_authDomain,
-    projectId: process.env.FIREBASE_projectId ,
-    storageBucket: process.env.FIREBASE_storageBucket ,
-    messagingSenderId: process.env.FIREBASE_messagingSenderId ,
-    appId: process.env.FIREBASE_appId
-
+    apiKey: "AIzaSyB1WGUlDpicPh4AxAxmHMyViVfB4E1azf8",
+  authDomain: "pressuraapp.firebaseapp.com",
+  projectId: "pressuraapp",
+  storageBucket: "pressuraapp.appspot.com",
+  messagingSenderId: "780305792682",
+  appId: "1:780305792682:web:e0e6079a047f9d1ecc9ad3"
 })
 
 export const auth = app.auth()
