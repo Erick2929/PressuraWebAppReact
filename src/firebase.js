@@ -1,15 +1,21 @@
-import firebase from "firebase/app";
-import 'firebase/auth'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth } from 'firebase/auth'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-const app = firebase.initializeApp({
-
-    apiKey: "AIzaSyB1WGUlDpicPh4AxAxmHMyViVfB4E1azf8",
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyB1WGUlDpicPh4AxAxmHMyViVfB4E1azf8",
   authDomain: "pressuraapp.firebaseapp.com",
   projectId: "pressuraapp",
   storageBucket: "pressuraapp.appspot.com",
   messagingSenderId: "780305792682",
-  appId: "1:780305792682:web:e0e6079a047f9d1ecc9ad3"
-})
+  appId: "1:780305792682:web:ba9aba326a8a433ccc9ad3"
+};
 
-export const auth = app.auth()
-export default app
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+export const auth = getAuth(app)
