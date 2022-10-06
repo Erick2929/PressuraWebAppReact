@@ -1,18 +1,8 @@
-import React, { Component } from 'react';
-import './Card.css';
-import SearchBar from './SearchBar';
+import React from "react";
+import "./Card.css";
 
-class Card extends Component {
-    render() {
-        return (
-            <div className='card'>
-                <SearchBar />
-                <p>
-                    Hola
-                </p>
-            </div>
-        );
-    }
-}
+const Card = ({ children }) => {
+  return <div className="card">{children}</div>;
+};
 
 export default Card;

@@ -1,0 +1,22 @@
+.card-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border-bottom: 3px solid var(--grey-1);
+}
+.selection {
+  background-color: var(--primary-color);
+  width: 0.5rem;
+  visibility: hidden;
+}
+.selection.selected {
+  visibility: visible;
+}
+.info {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
