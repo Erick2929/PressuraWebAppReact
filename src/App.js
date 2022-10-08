@@ -6,12 +6,15 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateC
 import { auth } from './firebase' 
 import Register from './components/Register';
 import LoginForm from './components/LoginForm'
+import Login from './components/Login';
+
 
 function App() {
 
   return ( 
     // <Register></Register>
     <LoginForm></LoginForm>
+    // <Login></Login>
   );
 }
 

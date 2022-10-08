@@ -5,29 +5,44 @@ import { auth } from '../firebase'
 import logo from '../assets/imgs/pressura-logotitle-white.png'
 
 export default function LoginForm() {
-  
-    // const [user, setUser] = useState({});
+
+    const [loginEmail, setLoginEmail] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
+    const [user, setUser] = useState({});
       
-    //   onAuthStateChanged(auth, (currentUser) => {
-    //       setUser(currentUser);
-    //   });
+    
   
-    // const [loginEmail, setLoginEmail] = useState('')
-    // const [loginPassword, setLoginPassword] = useState('')
+    const changeEmail = (event) => {
+        setLoginEmail(event.target.value);
+        console.log(event.target.value)
+    } 
   
-    // const login = async () => {
-    //     try{
-    //         const user = await signInWithEmailAndPassword(auth,loginEmail,loginPassword);
-    //         console.log(user);
-    //     }
-    //     catch (error){
-    //         console.log(error.message);
-    //     }
+    const changePassword = (event) => {
+        setLoginPassword(event.target.value);
+    } 
+
+    const login = async () => {
+
+        console.log(loginEmail);
+
+        try{
+            const user = await signInWithEmailAndPassword(auth,loginEmail,loginPassword);
+            //setUser(user)
+            console.log(user);
+        }
+
+        catch (error){
+            console.log(error.message);
+            alert(error.message);
+        }
         
-    // }
-    // const logout = async () => {
-    //     await signOut(auth);
-    // }
+    }
+    const logout = async () => {
+        console.log('salio de la cuenta')
+        alert('Has salido de la cuenta')
+        await signOut(auth);
+        //console.log(user)
+    }
 
   return (
     <div className="main">
@@ -36,8 +51,7 @@ export default function LoginForm() {
             <img src={logo} className='logo' ></img>
         </div>
 
-        {/* <h3>Ususario logeado: {user?.email}</h3> */}
-        
+        <h3>Ususario logeado: {user?.email}</h3>
 
         <div className="sub-main">
 
@@ -53,31 +67,31 @@ export default function LoginForm() {
                     </div>
 
                     <div className="second-input">
-                        <input type="text" placeholder="ejemplo@hotmail.com" className="name" 
-                        //     onChange={(event) => {
-                        //     setLoginEmail(event.target.value);
-                        // }}
+                        <input type="email" placeholder="ejemplo@hotmail.com" className="name" 
+                        value={loginEmail}
+                        onChange={changeEmail}
                          />
                     </div>
                     <div className='login-label'>
                         Contraseña:
                     </div>
                     <div className="second-input">
-                        <input type="password" placeholder="Contraseña" className="name"
-                        //  onChange={(event) => {
-                        //     setLoginPassword(event.target.value);
-                        // }} 
-                        />
+                        <input type="password" placeholder="Contraseña" className="name" 
+                        value={loginPassword}
+                        onChange={changePassword}
+                         />
                     </div>
                     
                     <div className='button-group'>
                         
-                        <button className="login-button" 
-                        // onClick={login}
-                        >Login</button>
+                        <button 
+                        className="login-button" 
+                        onClick={login}>
+                            Login
+                        </button>
                         {/* <button className="login-button-google">Login con google</button> */}
                         <button  
-                        // onClick={logout} 
+                        onClick={logout} 
                         className="login-button-google">Salir de la Cuenta</button>
                         
                     </div>
