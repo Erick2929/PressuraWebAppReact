@@ -1,18 +1,33 @@
-import React from "react";
+import { useState } from "react";
 import Card from "./Card";
 import CardItem from "./CardItem";
 import SearchBar from "./SearchBar";
+import "./PatientsCard.css";
 
 const PatientsCard = () => {
+  const [selected, setSelected] = useState(0);
+
+  const users = [
+    { firstName: "Roberto", lastName: "Perez Iga" },
+    { firstName: "Erick", lastName: "Siller" },
+    { firstName: "Jorge Claudio", lastName: "González Becerril" },
+    { firstName: "Diego", lastName: "Piñones Besnier" },
+  ];
+
   return (
-    <Card>
+    <Card className="patients-card">
       <SearchBar />
-      <CardItem
-        firstName="Jorge Claudio"
-        lastName="González Becerril"
-        selected
-      />
-      <CardItem firstName="Karym" lastName="García Lopez" />
+      <div className="items">
+        {users.map((user, index) => {
+          return (
+            <CardItem
+              firstName={user.firstName}
+              lastName={user.lastName}
+              selected={index === selected ? true : false}
+            />
+          );
+        })}
+      </div>
     </Card>
   );
 };

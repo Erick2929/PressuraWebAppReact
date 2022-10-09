@@ -2,6 +2,9 @@
   --primary-color: #259891;
   --grey-0: #f2f2f2;
   --grey-1: #e6e6e6;
+  --grey-2: #cccccc;
+  --grey-3: #b3b3b3;
+  overflow: hidden;
 }
 * {
   box-sizing: border-box;
@@ -19,7 +22,7 @@ body {
   gap: 2rem;
   padding: 0.6rem 1rem;
 }
-.navbar ul {
+.navbar > ul {
   display: flex;
   place-items: center;
   padding: 0;
@@ -27,7 +30,13 @@ body {
   list-style: none;
   gap: 1rem;
 }
-.navbar a {
+.navbar > ul > li > a {
   color: inherit;
   text-decoration: none;
+}
+.navbar .profile-card {
+  color: black;
+  transform: translateX(-60%);
+  top: 2%;
+  z-index: 1;
 }
