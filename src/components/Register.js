@@ -1,40 +1,57 @@
 import React from 'react'
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged, signOut } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 import { auth } from '../firebase' 
 import logo from '../assets/imgs/pressura-logotitle-white.png'
 
+
 export default function Register() {
 
-    const [registerEmail, setRegisterEmail] = useState('')
-
-  const [registerPassword, setRegisterPassword] = useState('')
-
-  const [user, setUser] = useState({});
-    
-    onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-    });
-
-  const register = async () => {
-    try{
-      const user = await createUserWithEmailAndPassword(auth,registerEmail,registerPassword);
-      console.log(user);
-    }
-    catch (error){
-      console.log(error.message);
-    }
-  }
-
-  const [loginEmail, setLoginEmail] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
-
-  const login = async () => {
+    const [loginEmail, setLoginEmail] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
+    const [loginPasswordConf, setLoginPasswordConf] = useState('')
+    const [user, setUser] = useState({});
+    const [notSame, setNotSame] = useState(false);
       
-  }
-  const logout = async () => {
-      await signOut(auth);
-  }
+    
+  
+    const changeEmail = (event) => {
+        setLoginEmail(event.target.value);
+        console.log(event.target.value)
+    } 
+  
+    const changePassword = (event) => {
+        setLoginPassword(event.target.value);
+        console.log(event.target.value)
+    } 
+    const changePasswordConf = (event) => {
+        setLoginPasswordConf(event.target.value);
+        console.log(event.target.value)
+    } 
+
+    const signup = async () => {
+
+        console.log(loginEmail);
+
+        try{
+            const user = await createUserWithEmailAndPassword(auth,loginEmail,loginPassword);
+            //setUser(user)
+            console.log(user);
+            alert('Su cuenta ha sido creada con exito!');
+        }
+
+        catch (error){
+            console.log(error.message);
+            alert(error.message);
+        }
+        
+    }
+    const logout = async () => {
+        console.log('salio de la cuenta')
+        alert('Has salido de la cuenta')
+        await signOut(auth);
+        //console.log(user)
+    }
 
   return (
     <div className="main">
@@ -43,14 +60,11 @@ export default function Register() {
             <img src={logo} className='logo' ></img>
         </div>
 
-        <h3>Ususario logeado: {user?.email}</h3>
-        
-
         <div className="sub-main">
 
             <div>
 
-                <div>
+                <div style={ {padding:'10px'} }>
                     <div style={{paddingTop: '20px'}}>
                         <h1>Registrate</h1>
                     </div>
@@ -60,30 +74,49 @@ export default function Register() {
                     </div>
 
                     <div className="second-input">
-                        <input type="text" placeholder="ejemplo@hotmail.com" className="name" onChange={(event) => {
-                            setRegisterEmail(event.target.value);
-                        }} />
+                        <input type="email" placeholder="ejemplo@hotmail.com" className="name" 
+                        value={loginEmail}
+                        onChange={changeEmail}
+                         />
                     </div>
                     <div className='login-label'>
                         Contraseña:
                     </div>
                     <div className="second-input">
-                        <input type="password" placeholder="Contraseña" className="name" onChange={(event) => {
-                            setRegisterPassword(event.target.value);
-                        }} />
+                        <input type="password" placeholder="Contraseña" className="name" 
+                        value={loginPassword}
+                        onChange={changePassword}
+                         />
                     </div>
+                    <div className='login-label'>
+                        Confirmar contraseña:
+                    </div>
+                    <div className="second-input">
+                        <input type="password" placeholder="Contraseña" className="name" 
+                        value={loginPasswordConf}
+                        onChange={changePasswordConf}
+                         />
+                    </div>
+                    
+
                     
                     <div className='button-group'>
                         
-                        <button className="login-button" onClick={register}>Login</button>
-                        <button className="login-button-google">Login con google</button>
-                        <button  onClick={logout} className="login-button-google">signOut</button>
+                        <button 
+                        className="login-button" 
+                        onClick={signup}>
+                            Registrate
+                        </button>
+                        {/* <button className="login-button-google">Login con google</button> */}
+                        <button  
+                        onClick={logout} 
+                        className="login-button-google">Registrate Con Google</button>
                         
                     </div>
 
                     <div className="link" style={{paddingTop: '20px'}}>
                         <p>
-                            Ya tienes cuenta? <a href="#">Ingresa Aqui</a>
+                            Ya tienes cuenta? <a href="#">Ingresa aqui</a>
                         </p>
                     </div>
 

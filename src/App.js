@@ -12,7 +12,7 @@ import Login from './components/Login';
 function App() {
 
   return ( 
-    // <Register></Register>
+    //<Register></Register>
     <LoginForm></LoginForm>
     // <Login></Login>
   );

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { signInWithEmailAndPassword,onAuthStateChanged, signOut } from 'firebase/auth'
+import { signInWithEmailAndPassword,signin, signOut,signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from '../firebase' 
 import logo from '../assets/imgs/pressura-logotitle-white.png'
 
@@ -44,6 +44,10 @@ export default function LoginForm() {
         //console.log(user)
     }
 
+    const ingresarConGoogle = async () => {
+        
+    }
+
   return (
     <div className="main">
 
@@ -51,11 +55,9 @@ export default function LoginForm() {
             <img src={logo} className='logo' ></img>
         </div>
 
-        <h3>Ususario logeado: {user?.email}</h3>
-
         <div className="sub-main">
 
-            <div>
+            <div style={ {padding:'10px'} }>
 
                 <div>
                     <div style={{paddingTop: '20px'}}>
@@ -87,12 +89,12 @@ export default function LoginForm() {
                         <button 
                         className="login-button" 
                         onClick={login}>
-                            Login
+                            Ingresar
                         </button>
                         {/* <button className="login-button-google">Login con google</button> */}
                         <button  
                         onClick={logout} 
-                        className="login-button-google">Salir de la Cuenta</button>
+                        className="login-button-google">Ingresa con Google</button>
                         
                     </div>
 
