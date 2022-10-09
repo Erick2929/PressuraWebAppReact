@@ -1,0 +1,24 @@
+.card-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border-bottom: 3px solid var(--grey-1);
+}
+.card-item:hover {
+  background-color: var(--grey-0);
+}
+.selection {
+  background-color: var(--primary-color);
+  width: 0.5rem;
+  visibility: hidden;
+}
+.selection.selected {
+  visibility: visible;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}

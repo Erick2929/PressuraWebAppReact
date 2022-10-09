@@ -1,0 +1,14 @@
+.info-card {
+    background-color: var(--grey-1);
+    height: calc(100vh - 6rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.4;
+}
+@media (max-width: 480px) {
+    .info-card {
+        height: calc(50vh - 1rem);
+    }
+}
