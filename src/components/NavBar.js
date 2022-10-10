@@ -35,9 +35,6 @@ const NavBar = () => {
       <a href="/" className="navbar-logo">
         <img src={logo} height="32px"></img>
       </a>
-      <div className="nombre-usuario">
-        <h5>{user}</h5>
-      </div>
       <ul>
         <li>
           <a href="/" onClick={logout} >Cerrar Sesión</a>

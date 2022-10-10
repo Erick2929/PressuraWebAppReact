@@ -6,6 +6,7 @@ import '../styles.css'
 
 
 export default function MainView() {
+
   return (
     <div className="app">
       <NavBar></NavBar>
