@@ -1,17 +1,33 @@
 import React from 'react'
-import { useState } from 'react';
-import { signInWithEmailAndPassword,signin, signOut,signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { useState, useEffect} from 'react';
+import { signInWithEmailAndPassword,signin, signOut,signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase' 
 import logo from '../assets/imgs/pressura-logotitle-white.png'
+import { useNavigate } from 'react-router-dom'; 
 
 export default function LoginForm() {
-
-    const [loginEmail, setLoginEmail] = useState('')
-    const [loginPassword, setLoginPassword] = useState('')
-    const [user, setUser] = useState({});
+    const navigate = useNavigate();
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+    const [user, setUser] = useState('');
       
-    
+    useEffect(() => {
+        onAuthStateChanged(auth, (userSession) => {
+            if(userSession !== null){
+                console.log('vvvv esta es la cuenta ')
+                console.log(userSession.email)
+                setUser(userSession.email)
+            }
+            else{
+                console.log('no hay cuenta logeada ')
+            }
+        })
+    },[])
   
+    const goToSignIn = () => {
+        navigate('/signin')
+    }
+
     const changeEmail = (event) => {
         setLoginEmail(event.target.value);
         console.log(event.target.value)
@@ -29,6 +45,7 @@ export default function LoginForm() {
             const user = await signInWithEmailAndPassword(auth,loginEmail,loginPassword);
             //setUser(user)
             console.log(user);
+            navigate('/mainView')
         }
 
         catch (error){
@@ -41,11 +58,14 @@ export default function LoginForm() {
         console.log('salio de la cuenta')
         alert('Has salido de la cuenta')
         await signOut(auth);
+        setUser('Has salido de la cuenta')
         //console.log(user)
     }
 
     const ingresarConGoogle = async () => {
-        
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth,provider);
+        console.log(provider)
     }
 
   return (
@@ -55,6 +75,8 @@ export default function LoginForm() {
             <img src={logo} className='logo' ></img>
         </div>
 
+        <h3> {user} </h3>
+
         <div className="sub-main">
 
             <div style={ {padding:'10px'} }>
@@ -63,7 +85,7 @@ export default function LoginForm() {
                     <div style={{paddingTop: '20px'}}>
                         <h1>Inicia Sesion</h1>
                     </div>
-                    
+
                     <div className='login-label-1'>
                         Correo Electronico:
                     </div>
@@ -100,7 +122,7 @@ export default function LoginForm() {
 
                     <div className="link" style={{paddingTop: '20px'}}>
                         <p>
-                            No tienes cuenta? <a href="#">Crea una aqui</a>
+                            No tienes cuenta? <a href="" onClick={goToSignIn}>Crea una aqui</a>
                         </p>
                     </div>
 

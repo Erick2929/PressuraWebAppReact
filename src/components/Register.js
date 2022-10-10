@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, signOut } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
 import { auth } from '../firebase' 
 import logo from '../assets/imgs/pressura-logotitle-white.png'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Register() {
-
+    const navigate = useNavigate();
     const [loginEmail, setLoginEmail] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
     const [loginPasswordConf, setLoginPasswordConf] = useState('')
@@ -14,7 +15,10 @@ export default function Register() {
     const [notSame, setNotSame] = useState(false);
       
     
-  
+    const goToLogIn = () => {
+        navigate('/')
+    }
+
     const changeEmail = (event) => {
         setLoginEmail(event.target.value);
         console.log(event.target.value)
@@ -28,6 +32,12 @@ export default function Register() {
         setLoginPasswordConf(event.target.value);
         console.log(event.target.value)
     } 
+
+    const ingresarConGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth,provider);
+        console.log(provider)
+    }
 
     const signup = async () => {
 
@@ -109,14 +119,14 @@ export default function Register() {
                         </button>
                         {/* <button className="login-button-google">Login con google</button> */}
                         <button  
-                        onClick={logout} 
+                        onClick={ingresarConGoogle} 
                         className="login-button-google">Registrate Con Google</button>
                         
                     </div>
 
                     <div className="link" style={{paddingTop: '20px'}}>
                         <p>
-                            Ya tienes cuenta? <a href="#">Ingresa aqui</a>
+                            Ya tienes cuenta? <a href="" onClick={goToLogIn} >Ingresa aqui</a>
                         </p>
                     </div>
 

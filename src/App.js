@@ -1,20 +1,20 @@
-import logo from '../src/assets/imgs/pressura-logotitle-white.png'
 import './App.css';
-import { Container } from 'react-bootstrap';
-import { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from './firebase' 
-import Register from './components/Register';
 import LoginForm from './components/LoginForm'
-import Login from './components/Login';
-
-
+import Register from './components/Register';
+import NavBar from './components/NavBar'
+import PatientsCard from './components/PatientsCard'
+import InfoCard from './components/InfoCard'
+import MainView from './components/MainView';
+import { Route, Routes } from 'react-router-dom'
 function App() {
 
+
   return ( 
-    //<Register></Register>
-    <LoginForm></LoginForm>
-    // <Login></Login>
+    <Routes>
+      <Route path='/' element={<LoginForm></LoginForm>} ></Route>
+      <Route path='/signin' element={<Register></Register>} ></Route>
+      <Route path='/mainView' element={<MainView></MainView>} ></Route>
+    </Routes>
   );
 }
 
