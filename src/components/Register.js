@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
+import { createUserWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged} from 'firebase/auth'
 import { auth } from '../firebase' 
 import logo from '../assets/imgs/pressura-logotitle-white.png'
 import { useNavigate } from 'react-router-dom';
+import { collection, doc, setDoc ,  getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 
 export default function Register() {
@@ -12,9 +14,35 @@ export default function Register() {
     const [loginPassword, setLoginPassword] = useState('')
     const [loginPasswordConf, setLoginPasswordConf] = useState('')
     const [user, setUser] = useState({});
+    const [userUid, setUserUid] = useState({});
     const [notSame, setNotSame] = useState(false);
-      
+    const cuentasDoc = collection(db, "Doctor");
     
+    const crearDoctor = async () => {
+        await setDoc(doc(cuentasDoc, userUid), {
+            CorreoElectronico: user,
+            IDDoctor: "",
+            Nombre: user,
+            Pacientes: [""]
+        });
+    }
+    
+    useEffect(() => {
+        onAuthStateChanged(auth, (userSession) => {
+            if(userSession !== null){
+                console.log('vvvv esta es la cuenta ')
+                console.log(userSession.email)
+                setUser(userSession.email)
+                setUserUid(userSession.uid)
+                crearDoctor();
+            }
+            else{
+                console.log('no hay cuenta logeada ')
+            }
+        })
+    },[])
+    
+
     const goToLogIn = () => {
         navigate('/')
     }
@@ -46,7 +74,7 @@ export default function Register() {
         try{
             const user = await createUserWithEmailAndPassword(auth,loginEmail,loginPassword);
             //setUser(user)
-            console.log(user);
+            console.log(user.uid);
             alert('Su cuenta ha sido creada con exito!');
         }
 
@@ -117,7 +145,11 @@ export default function Register() {
                         onClick={signup}>
                             Registrate
                         </button>
-                        {/* <button className="login-button-google">Login con google</button> */}
+                        <button 
+                        className="login-button" 
+                        onClick={crearDoctor}>
+                            Prueba
+                        </button>
                         <button  
                         onClick={ingresarConGoogle} 
                         className="login-button-google">Registrate Con Google</button>

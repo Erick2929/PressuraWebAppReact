@@ -24,6 +24,7 @@ const PatientsCard = () => {
   const readUsers = async () => {
     const snap = await getDocs(collection(db, "Paciente"));
     setUsers(buildUsers(snap));
+    console.log(buildUsers(snap))
   }
   
   useEffect(() => {

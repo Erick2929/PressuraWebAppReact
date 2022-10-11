@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect} from 'react';
-import { signInWithEmailAndPassword,signin, signOut,signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
+import { signInWithEmailAndPassword, signOut,signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase' 
 import logo from '../assets/imgs/pressura-logotitle-white.png'
 import { useNavigate } from 'react-router-dom'; 
