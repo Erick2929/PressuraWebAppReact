@@ -19,6 +19,7 @@ export default function Register() {
     const cuentasDoc = collection(db, "Doctor");
     
     const crearDoctor = async () => {
+        console.log('se crea doc')
         await setDoc(doc(cuentasDoc, userUid), {
             CorreoElectronico: user,
             IDDoctor: "",
@@ -75,7 +76,7 @@ export default function Register() {
             const user = await createUserWithEmailAndPassword(auth,loginEmail,loginPassword);
             //setUser(user)
             console.log(user.uid);
-            alert('Su cuenta ha sido creada con exito!');
+            navigate('/register-data')
         }
 
         catch (error){
@@ -102,7 +103,7 @@ export default function Register() {
 
             <div>
 
-                <div style={ {padding:'10px'} }>
+                <div style={ {padding:'10px',minWidth:'40vh'} }>
                     <div style={{paddingTop: '20px'}}>
                         <h1>Registrate</h1>
                     </div>
@@ -145,11 +146,7 @@ export default function Register() {
                         onClick={signup}>
                             Registrate
                         </button>
-                        <button 
-                        className="login-button" 
-                        onClick={crearDoctor}>
-                            Prueba
-                        </button>
+
                         <button  
                         onClick={ingresarConGoogle} 
                         className="login-button-google">Registrate Con Google</button>

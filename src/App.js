@@ -6,6 +6,7 @@ import PatientsCard from './components/PatientsCard'
 import InfoCard from './components/InfoCard'
 import MainView from './components/MainView';
 import { Route, Routes } from 'react-router-dom'
+import RegisterData from './components/RegisterData';
 function App() {
 
 
@@ -14,6 +15,7 @@ function App() {
       <Route path='/' element={<LoginForm></LoginForm>} ></Route>
       <Route path='/signin' element={<Register></Register>} ></Route>
       <Route path='/mainView' element={<MainView></MainView>} ></Route>
+      <Route path='/register-data' element={<RegisterData></RegisterData>} ></Route>
     </Routes>
   );
 }
