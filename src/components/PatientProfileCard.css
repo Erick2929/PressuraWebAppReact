@@ -1,0 +1,27 @@
+.patient-profile-card {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  padding: 1rem 2rem;
+}
+@media (max-width: 480px) {
+  .patient-profile-card {
+    box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.1);
+  }
+}
+.patient-profile-card h3 {
+  text-align: center;
+  margin-top: 0;
+}
+.patient-profile-card ul {
+  margin-top: 0;
+  padding: 0;
+  list-style: none;
+  place-self: start;
+}
+.patient-profile-card li.title {
+  color: lightslategrey;
+}
+.patient-profile-card li:not(.title) {
+  margin-bottom: 1rem;
+}
