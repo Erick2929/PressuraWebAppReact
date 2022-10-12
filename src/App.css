@@ -67,7 +67,7 @@ html{
 .sub-main {
   display: flex;
   justify-content: center;
-  min-height: 450px;
+  min-height: 300px;
   min-width: 43vh;
   box-shadow: 11px 12px 13px 12px #165c57;
   align-self: center;
@@ -172,3 +172,9 @@ a{
     justify-content: space-between;
     flex-direction: row;
  }
+ .button-group-end{
+  display: flex;
+  padding-top: 25px;
+  justify-content: end;
+  flex-direction: row;
+}
