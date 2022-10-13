@@ -1,9 +1,9 @@
 import logo from "../assets/imgs/icon-profile.png";
 import "./CardItem.css";
 
-const CardItem = ({ firstName, lastName, selected }) => {
+const CardItem = ({ firstName, lastName, selected, onClick }) => {
   return (
-    <div className="card-item">
+    <div className="card-item" onClick={onClick}>
       <div className={"selection " + (selected ? "selected" : "")}></div>
       <div className="info">
         <img src={logo} height="32px"></img>

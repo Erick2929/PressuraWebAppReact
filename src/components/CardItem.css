@@ -3,6 +3,8 @@
   flex-direction: row;
   gap: 1rem;
   border-bottom: 3px solid var(--grey-1);
+  cursor: pointer;
+  user-select: none;
 }
 .card-item:hover {
   background-color: var(--grey-0);
