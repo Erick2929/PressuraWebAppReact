@@ -4,37 +4,54 @@ import CardItem from "./CardItem";
 import SearchBar from "./SearchBar";
 import "./PatientsCard.css";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const PatientsCard = ({ selectedUser, onClickCardItem }) => {
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sessionEmail, setSessionEmail] = useState("");
 
   const buildUsers = (users) => {
     let arr = [];
-    users.forEach(user => {
+    users.forEach((user) => {
       user = user.data();
       arr.push({
         id: user.IDPaciente,
         name: user.NombrePaciente,
-      })
+      });
     });
     return arr;
-  }
-  
-  const readUsers = async () => {
-    const snap = await getDocs(query(collection(db, "PacienteConDoctores"), where("IDDoctor", "==", "pato02@ejemplo.com"), where("Relacion", "==", 3)));
+  };
+
+  const readUsers = async (doctorEmail) => {
+    const snap = await getDocs(
+      query(
+        collection(db, "PacienteConDoctores"),
+        where("IDDoctor", "==", doctorEmail),
+        where("Relacion", "==", 3)
+      )
+    );
     setUsers(buildUsers(snap));
-  }
-  
+  };
+
   useEffect(() => {
-    readUsers();
+    onAuthStateChanged(auth, (userSession) => {
+      if (userSession !== null) {
+        setSessionEmail(userSession.email);
+        readUsers(userSession.email);
+      } else {
+        console.alert("No estás conectado ha una cuenta.");
+      }
+    });
   }, []);
 
   return (
     <Card className="patients-card">
-      <SearchBar />
+      <SearchBar onClickSearch={setSearch} />
       <div className="items">
         {users.map((user, index) => {
+          if (!user.name.toLowerCase().startsWith(search)) return;
           return (
             <CardItem
               firstName={user.name}

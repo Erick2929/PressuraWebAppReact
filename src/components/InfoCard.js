@@ -6,7 +6,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
 
-const InfoCard = ({ selectedUser, selectedId }) => {
+const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
   const [userData, setUserData] = useState({});
 
   const readUser = async () => {
@@ -21,7 +21,7 @@ const InfoCard = ({ selectedUser, selectedId }) => {
   }
 
   
-  if (selectedUser === -1) {
+  if (selectedUser === INVALID_INDEX) {
     if (userData.id !== undefined) {
       setUserData({});
     }
