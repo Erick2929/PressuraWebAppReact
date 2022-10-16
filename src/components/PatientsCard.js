@@ -7,7 +7,7 @@ import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-const PatientsCard = ({ selectedUser, onClickCardItem }) => {
+const PatientsCard = ({ selectedUser, onClickCardItem, onClickAdd }) => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [sessionEmail, setSessionEmail] = useState("");
@@ -48,7 +48,7 @@ const PatientsCard = ({ selectedUser, onClickCardItem }) => {
 
   return (
     <Card className="patients-card">
-      <SearchBar onClickSearch={setSearch} />
+      <SearchBar onClickSearch={setSearch} onClickAdd={onClickAdd} />
       <div className="items">
         {users.map((user, index) => {
           if (!user.name.toLowerCase().startsWith(search)) return;

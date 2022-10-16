@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import RegisterData from "./components/RegisterData";
 import PatientView from "./components/PatientView";
 import { useState } from "react";
+import AddCard from "./components/AddCard";
 function App() {
   const INVALID_INDEX = -1;
   const [selectedUser, setSelectedUser] = useState(INVALID_INDEX);

@@ -73,7 +73,7 @@ const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
           </li>
         </ul>
       </div>
-      <a href={`/patientView?userId="${selectedId}"`}>
+      <a href="/patientView">
         <p className="button">Ver más</p>
       </a>
     </Card>
