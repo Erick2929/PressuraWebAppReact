@@ -18,7 +18,10 @@ function App() {
   const selectUser = (index, userId) => {
     setSelectedId(selectedUser == index ? "" : userId);
     setSelectedUser(selectedUser == index ? -1 : index);
+    console.log("pov cuando aqui->>",userId)
   };
+
+
 
   return (
     <Routes>
@@ -39,7 +42,7 @@ function App() {
         path="/register-data"
         element={<RegisterData></RegisterData>}
       ></Route>
-      <Route path="/patientView" element={<PatientView />}></Route>
+      <Route path="/patientView" element={<PatientView selectedEmail={selectedId}/>}></Route>
     </Routes>
   );
 }

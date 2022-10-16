@@ -2,11 +2,11 @@ import profile from "../assets/imgs/icon-profile.svg";
 import Card from "./Card";
 import "./PatientProfileCard.css";
 
-const PatientProfileCard = () => {
+const PatientProfileCard = ({name}) => {
   return (
     <Card className="patient-profile-card">
       <img src={profile} width="60%" />
-      <h3>Eduardo Roberto Loya Pérez</h3>
+      <h3>{name}</h3>
       <ul>
         <li className="title">Edad</li>
         <li>21</li>
