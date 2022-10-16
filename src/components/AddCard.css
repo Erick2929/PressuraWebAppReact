@@ -28,7 +28,7 @@
   flex: 1;
   background-color: var(--grey-0);
 }
-.add-card ul.list-sections li:first-of-type {
+.add-card ul.list-sections li.selected {
   background-color: white;
 }
 .add-card ul.list-sections li a {
