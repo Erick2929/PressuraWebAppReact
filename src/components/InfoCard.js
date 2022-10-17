@@ -15,11 +15,20 @@ const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
     const snap = await getDocs(
       query(collection(db, "Paciente"), where("IDPaciente", "==", selectedId))
     );
-    if (snap.size != 1) setUserData({});
+    if (snap.size != 1) {
+      setUserData({});
+      return;
+    };
     const user = snap.docs[0].data();
     const data = {
       id: selectedId,
-      name: user.Nombre,
+      name: user.Nombre == undefined ? "Indefinido" : user.Nombre,
+      sex: user.Sexo == undefined ? "Indefinido" : (user.Sexo == 1 ? "Masculino" : "Femenino"),
+      height: user.Altura == undefined ? "Indefinido" : user.Altura,
+      weight: user.Peso == undefined ? "Indefinido" : user.Peso,
+      date: user.FechaNacimiento == undefined ? new Date() : user.FechaNacimiento.toDate(),
+      age: user.FechaNacimiento == undefined ? "Indefinido" : 2022 - user.FechaNacimiento.toDate().getFullYear(),
+      dateString: user.FechaNacimiento == undefined ? "Indefinido" : user.FechaNacimiento.toDate().toDateString(),
     };
     setUserData(data);
   };
@@ -47,32 +56,32 @@ const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
           <li>
             <span className="title">Edad</span>
             <br />
-            21
+            {userData.age}
           </li>
           <li>
             <span className="title">Peso</span>
             <br />
-            65 kg.
+            {userData.weight} kg.
           </li>
           <li>
             <span className="title">Altura</span>
             <br />
-            1.73 m.
+            {userData.height} m.
           </li>
           <li>
             <span className="title">Sexo</span>
             <br />
-            Masculino
+            {userData.sex}
           </li>
           <li>
             <span className="title">Fecha de Nacimiento</span>
             <br />
-            23 de Marzo de 1950
+            {userData.dateString}
           </li>
           <li>
-            <span className="title">Teléfono</span>
+            <span className="title">Correo Electrónico</span>
             <br />
-            (000) 000 00 00
+            {userData.id}
           </li>
         </ul>
       </div>
