@@ -2,6 +2,7 @@
     background-color: #259891;
     color: whitesmoke;
     width: -moz-fit-content;
+    cursor: pointer;
     width: fit-content;
     border-radius: 0.5rem;
     padding: 1rem 2rem;

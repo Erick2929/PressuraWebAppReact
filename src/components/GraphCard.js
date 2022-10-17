@@ -16,7 +16,7 @@ const GraphCard = ({paciente}) =>{
   const [distolicDev, setDistolicDev] = useState(0);
   const [dAvg, setdAvg] = useState(0);
   const [sAvg, setsAvg] = useState(0);
-
+  const [noSePuedeCalcular, setnoSePuedeCalcular] = useState(false)
 
   const buildUsers = (users) => {
     let arr = [];
@@ -72,10 +72,6 @@ const GraphCard = ({paciente}) =>{
     setdataCSV(buildUsersCSV(snap))
     setdistolicP(buildStdDevDis(snap));
     setsistolicP(buildStdDevSis(snap));
-    setSistolicDev(getStandardDeviation(sistolicP))
-    setDistolicDev(getStandardDeviation(distolicP))
-    setsAvg(mean(sistolicP))
-    setdAvg(mean(distolicP))
   };
 
   function mean(array) {
@@ -90,6 +86,18 @@ const GraphCard = ({paciente}) =>{
     return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
   }
 
+  const calcularDesviaciones = () => {
+    if(sistolicP.length != 0){
+      setSistolicDev(getStandardDeviation(sistolicP))
+      setDistolicDev(getStandardDeviation(distolicP))
+      setsAvg(mean(sistolicP))
+      setdAvg(mean(distolicP))
+    }
+    else{
+      setnoSePuedeCalcular(true)
+    }
+  }
+
   useEffect(() => {
     readBloodP();
   }, []);
@@ -97,7 +105,8 @@ const GraphCard = ({paciente}) =>{
 
   return (
     <div className="chart-content">
-      
+        <button onClick={calcularDesviaciones} style={{cursor: 'pointer'}}>Calcular Desviación</button>
+        {noSePuedeCalcular && <p style={{color:'red'}}> La desviacion estandar no puede ser calculada</p> }
         <p>Desviacion Estandar: {distolicDev} (diastolica)  ||  Media: {dAvg}</p>
         <p>Desviacion Estandar: {sistolicDev} (sistolica)  ||  Media: {sAvg}</p>
 
@@ -127,7 +136,7 @@ const GraphCard = ({paciente}) =>{
         className="btn btn-primary"
         target="_blank"
       >
-        <button className="boton-csv" >Descargar CSV</button>
+        <button className="boton-csv" style={{cursor: 'pointer'}}>Descargar CSV</button>
       </CSVLink>
 
     </div>
