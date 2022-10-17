@@ -10,7 +10,7 @@ const CardItem = ({ firstName, lastName, selected, onClick }) => {
         <span>
           {firstName}
           <br />
-          {lastName}
+          <span className="subtext">{lastName}</span>
         </span>
       </div>
     </div>

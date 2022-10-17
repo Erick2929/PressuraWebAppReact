@@ -127,6 +127,7 @@ html{
   color: white;
   border: none;
   font-size: larger;
+  cursor: pointer;
 }
 
 .login-button-google{
@@ -137,6 +138,7 @@ html{
   color: white;
   border: none;
   font-size: larger;
+  cursor: pointer;
 }
 
 .link{

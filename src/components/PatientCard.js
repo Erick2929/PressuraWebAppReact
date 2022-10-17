@@ -3,7 +3,7 @@ import Card from "./Card";
 import GraphCard from "./GraphCard";
 import "./PatientCard.css";
 
-const PatientCard = () => {
+const PatientCard = ({children}) => {
   return (
     <Card className="patient-card">
       <a href="/mainView">
@@ -15,7 +15,7 @@ const PatientCard = () => {
         autem cupiditate officia error eveniet corporis commodi mollitia, ab
         maiores ex at!
       </p>
-      <GraphCard/>
+      {children}
     </Card>
   );
 };

@@ -3,45 +3,51 @@ import logo from "../assets/imgs/pressura-logo-white.png";
 import profile from "../assets/imgs/icon-profile.svg";
 import ProfileCard from "./ProfileCard";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
-const NavBar = () => {
+const NavBar = ({ onClickLogout }) => {
   const [profileOpened, setProfileOpened] = useState(false);
-  const [user, setUser] = useState('');
-  const navigate = useNavigate();
+  const [user, setUser] = useState("");
+  const [doctorData, setDoctorData] = useState({});
 
   useEffect(() => {
     onAuthStateChanged(auth, (userSession) => {
-        if(userSession !== null){
-          setUser(userSession.email)
-          console.log(user.email,' ha entrado a main view')
-        }
-        else{
-            console.log('no hay cuenta logeada ')
-        }
-    })
-  },[])
+      if (userSession !== null) {
+        setUser(userSession.email);
+      }
+    });
+  }, []);
 
-  const logout = async () => {
-    console.log('salio de la cuenta')
-    alert('Has salido de la cuenta')
-    await signOut(auth);
-    setUser('Has salido de la cuenta')
-  }
+  useEffect(() => {
+    const getDoctorData = async () => {
+      const doctorsCollectionRef = collection(db, "Doctor");
+      const doctorQuery = query(
+        doctorsCollectionRef,
+        where("IDDoctor", "==", user)
+      );
+      const doctorSnap = await getDocs(doctorQuery);
+      setDoctorData(doctorSnap.size > 0 ? doctorSnap.docs[0].data() : {});
+    };
+    getDoctorData();
+  }, [user]);
 
   return (
     <nav className="navbar">
-      <a href="/" className="navbar-logo">
+      <a href="/mainView" className="navbar-logo">
         <img src={logo} height="32px"></img>
       </a>
       <ul>
         <li>
-          <a href="/" onClick={logout} >Cerrar Sesión</a>
-          {profileOpened && <ProfileCard />}
+          <a href="#" onClick={onClickLogout}>
+            Cerrar Sesión
+          </a>
+          {profileOpened && (
+            <ProfileCard name={doctorData.Nombre} email={user} />
+          )}
         </li>
         <li>
-          <a href="#"  onClick={() => setProfileOpened(!profileOpened)}>
+          <a href="#" onClick={() => setProfileOpened(!profileOpened)}>
             <img src={profile} height="32px"></img>
           </a>
         </li>

@@ -17,6 +17,7 @@ export default function Register() {
     const [userUid, setUserUid] = useState({});
     const [length, setLength] = useState(0);
     const [notLong, setNotLong] = useState(false);
+    const [notSame, setnotSame] = useState(false);
     const cuentasDoc = collection(db, "Doctor");
     
     const crearDoctor = async () => {
@@ -29,6 +30,17 @@ export default function Register() {
         });
     }
     
+    const checkSame = () => {
+        if(loginPassword === loginPasswordConf){
+            setnotSame(false);
+
+        }
+        else{
+            console.log('not Samee -->',loginPassword,loginPasswordConf)
+            setnotSame(true);
+        }
+    }
+
     useEffect(() => {
         onAuthStateChanged(auth, (userSession) => {
             if(userSession !== null){
@@ -69,7 +81,7 @@ export default function Register() {
     const changePasswordLength = (event) => {
         setLoginPasswordConf(event.target.value);
         console.log(event.target.value)
-        if(length <= 11){
+        if(length <= 10){
             setNotLong(true)
         }else{
             setNotLong(false)
@@ -89,18 +101,18 @@ export default function Register() {
 
     const signup = async () => {
 
-        console.log(loginEmail);
-
-        try{
-            const user = await createUserWithEmailAndPassword(auth,loginEmail,loginPassword);
-            //setUser(user)
-            console.log(user.uid);
-            navigate('/register-data')
-        }
-
-        catch (error){
-            console.log(error.message);
-            alert(error.message);
+        if(!notSame){
+            try{
+                const user = await createUserWithEmailAndPassword(auth,loginEmail,loginPassword);
+                //setUser(user)
+                console.log(user.uid);
+                navigate('/register-data')
+            }
+    
+            catch (error){
+                console.log(error.message);
+                alert(error.message);
+            }
         }
         
     }
@@ -147,15 +159,16 @@ export default function Register() {
                         onChange={changePassword}
                          />
                     </div>
-                    <div className='login-label'>
+                    {/* <div className='login-label'>
                         Confirmar contraseña:
                     </div>
+                    {notSame && <p style={{color:'red'}}> La contraseñas no coinciden</p> }
                     <div className="second-input">
                         <input type="password" placeholder="Contraseña" className="name" 
                         value={loginPasswordConf}
                         onChange={changePasswordConf}
                          />
-                    </div>
+                    </div> */}
                     
 
                     

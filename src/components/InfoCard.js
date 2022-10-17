@@ -1,26 +1,29 @@
 import Card from "./Card";
 import missing from "../assets/imgs/icon-missing.svg";
 import profile from "../assets/imgs/icon-profile.svg";
-import "./InfoCard.css";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./InfoCard.css";
 
 const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
 
   const readUser = async () => {
-    const snap = await getDocs(query(collection(db, "Paciente"), where("IDPaciente", "==", selectedId)));
+    const snap = await getDocs(
+      query(collection(db, "Paciente"), where("IDPaciente", "==", selectedId))
+    );
     if (snap.size != 1) setUserData({});
     const user = snap.docs[0].data();
     const data = {
       id: selectedId,
-      name: user.Nombre
+      name: user.Nombre,
     };
     setUserData(data);
-  }
+  };
 
-  
   if (selectedUser === INVALID_INDEX) {
     if (userData.id !== undefined) {
       setUserData({});
@@ -73,7 +76,7 @@ const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
           </li>
         </ul>
       </div>
-      <a href={`/patientView?userId="${selectedId}"`}>
+      <a href="#" onClick={() => navigate("/patientView")}>
         <p className="button">Ver más</p>
       </a>
     </Card>

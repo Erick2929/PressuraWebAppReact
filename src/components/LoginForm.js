@@ -75,7 +75,7 @@ export default function LoginForm() {
             <img src={logo} className='logo' ></img>
         </div>
 
-        <h3> {user} </h3>
+        
 
         <div className="sub-main">
 

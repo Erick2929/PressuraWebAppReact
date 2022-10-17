@@ -1,0 +1,45 @@
+div.request-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+div.request-item > div.data {
+    flex: 4;
+}
+div.request-item > div.data > p {
+    margin: 0;
+    padding: 0;
+    overflow-wrap: anywhere;
+}
+div.request-item > div.data > p.data-email {
+    color: grey;
+}
+div.request-item > ul {
+    display: flex;
+    place-content: flex-end;
+    flex: 1;
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+    place-self: end;
+}
+div.request-item > ul > li {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+div.request-item > ul > li > a > img {
+    height: 2rem;
+}
+div.request-item > ul > li > a > img {
+    background-color: var(--grey-2);
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+div.request-item > ul > li > a > img.accept {
+    background-color: var(--primary-color);
+}

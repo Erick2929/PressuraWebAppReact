@@ -1,0 +1,71 @@
+.modal-fade {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.add-card {
+  width: 100%;
+  max-width: 360px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.add-card .body {
+  padding: 2rem;
+}
+.add-card ul.list-sections {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.add-card ul.list-sections li {
+  list-style: none;
+  flex: 1;
+  background-color: var(--grey-0);
+}
+.add-card ul.list-sections li.selected {
+  background-color: white;
+}
+.add-card ul.list-sections li a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0;
+}
+.add-card ul.list-buttons {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 2rem;
+  justify-content: space-evenly;
+}
+.add-card ul.list-buttons li {
+  width: 40%;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.add-card ul.list-buttons li a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.8rem;
+  width: 100%;
+  height: 100%;
+}
+.add-card ul.list-buttons li.button-create {
+  background-color: var(--primary-color);
+  color: var(--grey-0);
+}
+.add-card ul.list-buttons li.button-cancel {
+  color: grey;
+  outline: 2px solid var(--grey-2);
+  outline-offset: -2px;
+}
