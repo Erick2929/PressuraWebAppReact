@@ -28,7 +28,7 @@ const InfoCard = ({ selectedUser, selectedId, INVALID_INDEX }) => {
       weight: user.Peso == undefined ? "Indefinido" : user.Peso,
       date: user.FechaNacimiento == undefined ? new Date() : user.FechaNacimiento.toDate(),
       age: user.FechaNacimiento == undefined ? "Indefinido" : 2022 - user.FechaNacimiento.toDate().getFullYear(),
-      dateString: user.FechaNacimiento == undefined ? "Indefinido" : user.FechaNacimiento.toDate().toDateString(),
+      dateString: user.FechaNacimiento == undefined ? "Indefinido" : user.FechaNacimiento.toDate().toLocaleDateString(),
     };
     setUserData(data);
   };

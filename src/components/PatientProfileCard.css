@@ -18,6 +18,7 @@
   padding: 0;
   list-style: none;
   place-self: start;
+  overflow-wrap: anywhere;
 }
 .patient-profile-card li.title {
   color: lightslategrey;

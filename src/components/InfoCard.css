@@ -28,6 +28,7 @@
     place-self: start;
     text-align: start;
     column-count: 3;
+    overflow-wrap: anywhere;
 }
 .info-card span.title {
     color: lightslategrey;
