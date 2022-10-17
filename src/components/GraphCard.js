@@ -3,7 +3,7 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { LineChart , AreaChart, Area, Line , XAxis , YAxis , CartesianGrid , Tooltip , Legend } from 'recharts'
 import { db } from '../firebase';
-import { CSVLink } from 'react-csv';
+import { CSVLink } from 'react-csv'; 
 
 
 
@@ -16,6 +16,7 @@ const GraphCard = ({paciente}) =>{
   const [distolicDev, setDistolicDev] = useState(0);
   const [dAvg, setdAvg] = useState(0);
   const [sAvg, setsAvg] = useState(0);
+  const [relajado, setRelajado] = useState('')
   const [noSePuedeCalcular, setnoSePuedeCalcular] = useState(false)
 
   const buildUsers = (users) => {
@@ -26,8 +27,9 @@ const GraphCard = ({paciente}) =>{
       arr.push({
         seconds: user.Fecha.seconds,
         fecha: user.Fecha.toDate().toDateString(),
-        sistolica: user.MedidaSuperior,
-        diastolica: user.MedidaInferior
+        sistolica: user.MedidaSuperior.toFixed(2),
+        diastolica: user.MedidaInferior.toFixed(2),
+        relajado: user.RelajadoTool
       });
     });
     const numAscending = [...arr].sort((a, b) => a.seconds - b.seconds);
@@ -109,13 +111,54 @@ const GraphCard = ({paciente}) =>{
     readBloodP();
   }, []);
 
+  const getIntroOfPage = (value) => {
+    if (value === 0) {
+      setRelajado('#f55858')
+      return "No";
+    }
+    if (value === 1) {
+      setRelajado('#58f57a')
+      return "Si";
+    }
+    return '';
+  };
+  
+  
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div style={
+          {
+            backgroundColor: '#ffffff',
+            padding: '10px',
+            borderRadius:'10px',
+            border: 'solid',
+            borderColor: '#cacaca'
+          }
+          }>
+          <p style={{
+            color: '#464646',
+            fontWeight: 'bold'
+          }}>{`Fecha: ${label}`}</p>
+          <p style={{ color: '#8884d8' }}>{`Sistolica: ${payload[0].value}`}</p>
+          <p style={{color: '#82ca9d'}} >{`Diastolica: ${payload[1].value}`}</p>
+          <p style={{color: relajado}}>{`Relajado: ${getIntroOfPage(payload[2].value)}`}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
+
 
   return (
     <div className="chart-content">
         <button onClick={calcularDesviaciones} style={{cursor: 'pointer'}}>Calcular Desviación</button>
         {noSePuedeCalcular && <p style={{color:'red'}}> La desviacion estandar no puede ser calculada</p> }
-        <p>Desviacion Estandar: {distolicDev} (diastolica)  ||  Media: {dAvg}</p>
-        <p>Desviacion Estandar: {sistolicDev} (sistolica)  ||  Media: {sAvg}</p>
+        <p>Desviacion Estandar: {distolicDev.toFixed(2)} (diastolica)  ||  Media: {dAvg.toFixed(2)}</p>
+        <p>Desviacion Estandar: {sistolicDev.toFixed(2)} (sistolica)  ||  Media: {sAvg.toFixed(2)}</p>
 
         <AreaChart width={1100} height={500} data={users}
         margin={{ top: 0, right: 10, left: 10, bottom: 10 }}>
@@ -132,9 +175,12 @@ const GraphCard = ({paciente}) =>{
         <XAxis dataKey="fecha" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
+        <Tooltip content={ <CustomTooltip /> } />
         <Area type="monotone" dataKey="sistolica" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
         <Area type="monotone" dataKey="diastolica" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+        <Area type="monotone" dataKey="relajado" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+        
+
       </AreaChart>
 
       <CSVLink
