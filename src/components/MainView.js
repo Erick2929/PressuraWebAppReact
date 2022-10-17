@@ -6,7 +6,8 @@ import "../styles.css";
 import AddCard from "./AddCard";
 import ConfirmCard from "./ConfirmCard";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 const MainView = ({
   onClickCardItem,
@@ -16,27 +17,47 @@ const MainView = ({
 }) => {
   const [isAddingPatient, setIsAddingPatient] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [isHandlingRequest, setIsHandlingRequest] = useState(false);
+  const [requestData, setRequestData] = useState({});
 
-  const showAddModal = () => {
-    setIsAddingPatient(true);
+  const addModal = (show) => {
+    if (show && (isSigningOut || isHandlingRequest)) return;
+    setIsAddingPatient(show);
+  }
+  const logOutModal = (show) => {
+    if (show && (isAddingPatient || isHandlingRequest)) return;
+    setIsSigningOut(show);
   };
-  const hideAddModal = () => {
-    setIsAddingPatient(false);
-  };
+  const requestModal = (show, props) => {
+    if (show && (!isAddingPatient || isHandlingRequest)) return;
+    setIsHandlingRequest(show);
+    setRequestData(props);
+  }
   const logOut = () => {
     signOut(auth);
     window.location.assign("/");
     alert("Sesión cerrada con éxito.");
   };
+  const handleRequest = async () => {
+    const reqRef = doc(db, "PacienteConDoctores", requestData.requestID);
+    if (requestData.accept) {
+      await updateDoc(reqRef, {Relacion: 3});
+    }
+    else {
+      await deleteDoc(reqRef);
+    }
+    requestModal(false, {});
+    addModal(false);
+  }
 
   return (
     <div className="app">
-      <NavBar onClickLogout={() => setIsSigningOut(true)}></NavBar>
+      <NavBar onClickLogout={() => logOutModal(true)}></NavBar>
       <div className="content">
         <PatientsCard
           selectedUser={selectedUser}
           onClickCardItem={onClickCardItem}
-          onClickAdd={showAddModal}
+          onClickAdd={() => addModal(true)}
         ></PatientsCard>
         <InfoCard
           selectedUser={selectedUser}
@@ -44,12 +65,21 @@ const MainView = ({
           INVALID_INDEX={INVALID_INDEX}
         ></InfoCard>
       </div>
-      {isAddingPatient && <AddCard onClickModalFade={hideAddModal} />}
+      {isAddingPatient && <AddCard onClickModalFade={() => addModal(false)} onClickRequest={requestModal}/>}
+      {isHandlingRequest && (
+        <ConfirmCard
+          title={requestData.title}
+          onClickConfirm={handleRequest}
+          onClickCancel={() => requestModal(false)}
+        >
+          {requestData.text}
+        </ConfirmCard>
+      )}
       {isSigningOut && (
         <ConfirmCard
           title="Cerrar Sesión"
           onClickConfirm={logOut}
-          onClickCancel={() => setIsSigningOut(false)}
+          onClickCancel={() => logOutModal(false)}
         >
           ¿Estás seguro que quieres cerrar sesión?
         </ConfirmCard>

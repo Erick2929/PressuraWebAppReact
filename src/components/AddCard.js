@@ -7,7 +7,7 @@ import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import RequestItem from "./RequestItem";
 
-const AddCard = ({ onClickModalFade }) => {
+const AddCard = ({ onClickModalFade, onClickRequest }) => {
   const Sections = {
     CreateNew: 0,
     Requests: 1,
@@ -34,11 +34,11 @@ const AddCard = ({ onClickModalFade }) => {
       );
       const snap = await getDocs(q);
       const arr = [];
-      snap.forEach((v) => {
-        const data = v.data();
+      snap.forEach((data) => {
         arr.push({
-          id: data.IDPaciente,
-          name: data.NombrePaciente,
+          docID: data.id,
+          id: data.data().IDPaciente,
+          name: data.data().NombrePaciente,
         });
       });
       setRequests(arr);
@@ -87,6 +87,23 @@ const AddCard = ({ onClickModalFade }) => {
     onClickModalFade();
   };
 
+  const onClickDeny = (docID) => {
+    onClickRequest(true, {
+      text: "¿Estás seguro que quieres eliminar la solicitud?",
+      title: "Eliminar Solicitud",
+      accept: false,
+      requestID: docID,
+    });
+  }
+  const onClickAccept = (docID) => {
+    onClickRequest(true, {
+      text: "¿Estás seguro que quieres aceptar la solicitud?",
+      title: "Aceptar Solicitud",
+      accept: true,
+      requestID: docID,
+    });
+  }
+
   return (
     <div
       className="modal-fade"
@@ -124,13 +141,18 @@ const AddCard = ({ onClickModalFade }) => {
               </ul>
             </>
           )}
-          {section === Sections.Requests && (
+          {section === Sections.Requests &&
             requests.map((req, i) => {
               return (
-                <RequestItem key={i} name={req.name} email={req.id} />
+                <RequestItem
+                  key={i}
+                  name={req.name}
+                  email={req.id}
+                  onClickDeny={() => onClickDeny(req.docID)}
+                  onClickAccept={() => onClickAccept(req.docID)}
+                />
               );
-            })
-          )}
+            })}
         </div>
       </Card>
     </div>

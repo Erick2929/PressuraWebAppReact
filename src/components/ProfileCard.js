@@ -11,7 +11,6 @@ const ProfileCard = ({ name, email }) => {
         <li className="title">Correo Electrónico</li>
         <li>{email}</li>
       </ul>
-      <a href="#">Editar</a>
     </Card>
   );
 };
