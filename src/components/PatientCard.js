@@ -1,5 +1,6 @@
 import back from "../assets/imgs/icon-back.svg";
 import Card from "./Card";
+import GraphCard from "./GraphCard";
 import "./PatientCard.css";
 
 const PatientCard = () => {
@@ -14,6 +15,7 @@ const PatientCard = () => {
         autem cupiditate officia error eveniet corporis commodi mollitia, ab
         maiores ex at!
       </p>
+      <GraphCard/>
     </Card>
   );
 };

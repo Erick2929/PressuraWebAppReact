@@ -3,46 +3,32 @@ import { LineChart , AreaChart, Area, Line , XAxis , YAxis , CartesianGrid , Too
 
 const data = [
   {
-    "name": "Page A",
-    "uv": 4000,
-    "pv": 2400,
-    "amt": 2400
+    "Fecha": '01/01/2022',
+    "Presion": 300
   },
   {
-    "name": "Page B",
-    "uv": 3000,
-    "pv": 1398,
-    "amt": 2210
+    "Fecha": '02/01/2022',
+    "Presion": 170
   },
   {
-    "name": "Page C",
-    "uv": 2000,
-    "pv": 9800,
-    "amt": 2290
+    "Fecha": '03/01/2022',
+    "Presion": 185
   },
   {
-    "name": "Page D",
-    "uv": 2780,
-    "pv": 3908,
-    "amt": 2000
+    "Fecha": '04/01/2022',
+    "Presion": 200
   },
   {
-    "name": "Page E",
-    "uv": 1890,
-    "pv": 4800,
-    "amt": 2181
+    "Fecha": '05/01/2022',
+    "Presion": 159
   },
   {
-    "name": "Page F",
-    "uv": 2390,
-    "pv": 3800,
-    "amt": 2500
+    "Fecha": '06/01/2022',
+    "Presion": 180
   },
   {
-    "name": "Page G",
-    "uv": 3490,
-    "pv": 4300,
-    "amt": 2100
+    "Fecha": '07/01/2022',
+    "Presion": 190
   }
 ];
 
@@ -60,12 +46,12 @@ const GraphCard = () =>{
           <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
         </linearGradient>
       </defs>
-      <XAxis dataKey="name" />
-      <YAxis />
+      <XAxis dataKey="Fecha" />
+      <YAxis dataKey='Presion' />
       <CartesianGrid strokeDasharray="3 3" />
       <Tooltip />
-      <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-      <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+      {/* <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" /> */}
+      <Area type="monotone" dataKey="Presion" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
     </AreaChart>
     )
 }
