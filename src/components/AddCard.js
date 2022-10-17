@@ -93,6 +93,7 @@ const AddCard = ({ onClickModalFade, onClickRequest }) => {
       title: "Eliminar Solicitud",
       accept: false,
       requestID: docID,
+      doctorID: user,
     });
   }
   const onClickAccept = (docID) => {
@@ -101,6 +102,7 @@ const AddCard = ({ onClickModalFade, onClickRequest }) => {
       title: "Aceptar Solicitud",
       accept: true,
       requestID: docID,
+      doctorID: user,
     });
   }
 
@@ -141,7 +143,7 @@ const AddCard = ({ onClickModalFade, onClickRequest }) => {
               </ul>
             </>
           )}
-          {section === Sections.Requests &&
+          {section === Sections.Requests && requests.length != 0 &&
             requests.map((req, i) => {
               return (
                 <RequestItem
@@ -153,6 +155,9 @@ const AddCard = ({ onClickModalFade, onClickRequest }) => {
                 />
               );
             })}
+          {section === Sections.Requests && requests.length == 0 && (
+            <p style={{color: "grey", textAlign: "center"}}>No existen solicitudes, actualmente.</p>
+          )}
         </div>
       </Card>
     </div>
