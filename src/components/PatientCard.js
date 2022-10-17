@@ -2,7 +2,7 @@ import back from "../assets/imgs/icon-back.svg";
 import Card from "./Card";
 import "./PatientCard.css";
 
-const PatientCard = () => {
+const PatientCard = ({children}) => {
   return (
     <Card className="patient-card">
       <a href="/mainView">
@@ -14,6 +14,7 @@ const PatientCard = () => {
         autem cupiditate officia error eveniet corporis commodi mollitia, ab
         maiores ex at!
       </p>
+      {children}
     </Card>
   );
 };

@@ -30,8 +30,9 @@ const PatientView = ({selectedEmail}) => {
       <NavBar></NavBar>
       <div className="content">
         <PatientProfileCard name={patientData.Nombre}/>
-        <PatientCard />
-        <GraphCard/>
+        <PatientCard>
+          <GraphCard paciente={selectedEmail} />
+        </PatientCard>
       </div>
     </div>
   );
