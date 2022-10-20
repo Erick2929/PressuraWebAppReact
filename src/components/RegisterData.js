@@ -22,7 +22,6 @@ export default function RegisterData() {
             CorreoElectronico: user,
             IDDoctor: "",
             Nombre: user,
-            Pacientes: [""]
         });
     }
     
@@ -36,8 +35,7 @@ export default function RegisterData() {
             await setDoc(doc(cuentasDoc, userUid), {
                 CorreoElectronico: user,
                 IDDoctor: user,
-                Nombre: name,
-                Pacientes: [""]
+                Nombre: name
             });
             alert('Su cuenta ha sido creada con exito!');
             navigate('/')
