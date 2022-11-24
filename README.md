@@ -1,8 +1,104 @@
-# Getting Started with Create React App
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <img src="https://user-images.githubusercontent.com/110145796/203722857-3fc93a7d-0b5f-4c75-84aa-7b146228923d.svg" width="60%" />
 
-## Available Scripts
+  <p align="center">
+  	<i>Work in Progress</i>
+    <br />
+    <a href="https://github.com/Erick2929/PressuraWebAppReact"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://pressuraapp.web.app/">Demo (Outdated Version)</a>
+    ·
+    <a href="https://github.com/Erick2929/PressuraWebAppReact/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Erick2929/PressuraWebAppReact/issues">Request Feature</a>
+  </p>
+</p>
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+  * [Authors](#authors)
+* [Features](#features)
+  * [Login](#login)
+  * [View Patients](#view-patients)
+  * [Search Patient](#search-patient)
+  * [Add Patient](#add-patient)
+  * [Handle Requests](#handle-requests)
+  * [Responsiveness](#responsiveness)
+* [Run the Project](#run-the-project)
+* [Contact](#contact)
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+A management tool for doctors to monitor their patients' blood pressure readings. This webapp works alongside an iOS app where patients register their blood pressure readings. This was a college project, where we worked under a doctor's supervision.
+
+### Built With
+* ReactJS
+* Firebase
+* HTML
+* CSS
+
+### Authors
+* Jorge Becerril 📫jorgebecerrilgm@gmail.com
+* Erick Siller 📫
+
+<!-- FEATURES -->
+## Features
+
+### Login
+
+Create an account, or log in to monitor your patients!
+
+<img src="https://user-images.githubusercontent.com/110145796/203729692-8be8af17-c492-4468-9259-85b9d5536ef0.gif" width="50%" />
+
+### View Patients
+
+View your patients displayed as a list.
+* Scroll through their names to find a patient
+* Preview their information by selecting them.
+
+<img src="https://user-images.githubusercontent.com/110145796/203730210-fe2f7565-4111-4aca-9bc4-93dd579d892f.gif" width="50%" />
+
+### Search Patient
+
+Filter your patients by name, to quickly find who you want.
+
+<img src="https://user-images.githubusercontent.com/110145796/203731480-978cb644-7565-4c7b-b56f-8c92a07a5c48.gif" width="50%" />
+
+### Add Patient
+
+Send a request to add a new patient to your list.
+* Enter a patient's email to send them a request.
+* Each patient can accept or decline requests from the Pressura's mobile app.
+* Once accepted, the patient will appear on the doctor's list.
+
+<img src="https://user-images.githubusercontent.com/110145796/203732125-22f4d8a4-9501-4fa7-84d4-9fae3924e59c.gif" width="50%" />
+
+### Handle Requests
+
+Accept patient requests to monitor them!
+* A patient can send a doctor a request from the Pressura's mobile app.
+* Accept or decline any request.
+* Once accpeted, the patient will appear on the doctor's list.
+
+<img src="https://user-images.githubusercontent.com/110145796/203732688-f1052c96-dfd9-41fa-8ce2-7b5954aabf75.gif" width="50%" />
+
+### Responsiveness
+
+The webapp is mobile-friendly, so any doctor can monitor their patients from anywhere at any time!
+
+<img src="https://user-images.githubusercontent.com/110145796/203734646-06f2e696-846a-4d0f-925d-325997fcae47.gif" width="50%" />
+
+<!-- RUN THE PROJECT -->
+## Run the Project
 
 In the project directory, you can run:
 
@@ -11,60 +107,14 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- CONTACT -->
+## Contact
 
-### `npm test`
+Jorge Becerril 🕊️ [@jorgebecerriltw](https://twitter.com/jorgebecerriltw) 📫 jorgebecerrilgm@gmail.com <br>
+Erick Siller 🕊️ 📫 <br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Project Link: [https://github.com/Erick2929/PressuraWebAppReact](https://github.com/Erick2929/PressuraWebAppReact)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: https://media.giphy.com/media/OFx2CMlnUkDCvmytKK/giphy.gif
